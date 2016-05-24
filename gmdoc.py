@@ -192,5 +192,11 @@ print("Project target: "+TARGET_FILE)
 if not os.path.isfile(TARGET_FILE):
 	die("Project file doesn't exist!")
 
+# Check optional command line arg (output directory)
+OUTPUT_DIRECTORY = 'output'; # Default output directory name
+if len(sys.argv) > 2:
+	OUTPUT_DIRECTORY = sys.argv[2]
+print("Output directory: "+OUTPUT_DIRECTORY)
+
 # Start documenting the given file
-doc(TARGET_FILE, 'output')
+doc(TARGET_FILE, OUTPUT_DIRECTORY)
