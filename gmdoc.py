@@ -119,6 +119,7 @@ def doc(project_file, outdir):
 	# doc information from them
 	print("Reading scripts...")
 	for script in project_xml.iter("script"):
+		# Get script path, name and extenstion
 		script_path = script.text.replace("\\","/")
 		script_path = os.path.join(project_dir,script_path)
 		script_name_and_ext = os.path.basename(script_path)
@@ -139,19 +140,32 @@ def doc(project_file, outdir):
 		# Generate a method object from the script file
 		method = Method(script_name, syntax)
 		desc = ''
+		is_private = False # If the script is private (and should be not be included)
 		for comment in comments:
 			the_param = strip_token("@param", comment)
 			the_return = strip_token("@return", comment)
-			if the_param:
+			the_flags = strip_token("@flags", comment)
+			if the_flags: # This line is a flag line
+				the_flags = the_flags.split()
+				for flag in the_flags:
+					if (flag == "private"): # Private, hides the script from the documentation
+						is_private = True
+					#elif (flag == ""): # Some other flag, doe something else
+						#
+			elif the_param: # This line is about a parameter
 				the_param = the_param.split(' ',1)
 				method.params.append(Param(the_param[0], TYPE_REAL, the_param[1]))
-			elif the_return:
+			elif the_return: # This line is about the return value
 				method.return_value = the_return
-			else:
+			else: # This line is part of the description
 				desc += strip_leading_comment_markup(comment)
 		method.description = desc
 		print(method.description)
-		project_methods.append(method)
+		# Add script to project script collection
+		if is_private != True: # Check if script was flagged as private
+			project_methods.append(method) # Add script to the project script collection
+		else:
+			print('Skipping private script ' + script_name)
 	print(">> Successfully read scripts")
 
 	# Write the HTML files
