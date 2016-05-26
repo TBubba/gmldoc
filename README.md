@@ -63,6 +63,8 @@ having to make documentation a separate, pain-staking task, it should all just c
 
 You must have [python 2.x](https://www.python.org/downloads/) installed to use this library. Follow the instructions on [python.org](https://www.python.org/) for installation on your specific platform.
 
+Jinja2 must also be installed to use this library. Instructions on how to install it can be found on [jinja.pocoo.org](http://jinja.pocoo.org/docs/dev/intro/).
+
 I plan to add binaries for the library in the future, for now it should suffice to simply clone this repo.
 
 The theme for the generated pages is written in [SASS](http://sass-lang.com/). To modify the styles, you will need a SASS compiler. Once you have one, compile 'all.scss' to a single css file 'all.css'. Eg. If you are using [sassc](https://github.com/sass/sassc)
