@@ -12,6 +12,7 @@ by adding comments to your scripts and objects. You can document your scripts as
 /// @param arg1 The second argument to the function
 /// @return An awesome value that you probably want to deal with
 
+// This comment will be ignored
 return argument0 + argument1
 ```
 
@@ -24,17 +25,6 @@ Each script has four components;
 
 You can comment any way you like, the tool will stop reading your comments once a break in
 leading comment is found.
-
-```
-/*
-** another_cool_script()
-** I prefer stars in my docs
-** @return Another value
-*/
-
-// This comment is ignored
-return 5;
-```
 
 You can also use markup in your comments to give headings, bold text and code examples like so;
 
@@ -61,33 +51,15 @@ having to make documentation a separate, pain-staking task, it should all just c
 
 ### Installation
 
-You must have [python 2.x](https://www.python.org/downloads/) installed to use this library. Follow the instructions on [python.org](https://www.python.org/) for installation on your specific platform.
-
-Jinja2 must also be installed to use this library. Instructions on how to install it can be found on [jinja.pocoo.org](http://jinja.pocoo.org/docs/dev/intro/).
-
-I plan to add binaries for the library in the future, for now it should suffice to simply clone this repo.
-
-The theme for the generated pages is written in [SASS](http://sass-lang.com/). To modify the styles, you will need a SASS compiler. Once you have one, compile 'all.scss' to a single css file 'all.css'. Eg. If you are using [sassc](https://github.com/sass/sassc)
-
-```
-cd styles
-sassc all.scss > all.css
-```
+The installation only takes minutes, and the guide is very beginner friendly. You can find it at the **[installation wiki page](../../wiki/installation)**.
 
 ### Usage
 
-Command Line
-
-```
-python gmdoc.py /path/to/MyProject.gmx/MyProject.project.gmx
-```
+You can find the usage guide on the **[usage wiki page](../../wiki/usage)**.
 
 ### TODO 
 
-- Document extension constants
-- Add type information to parameters and returns
-- Document objects and their properties
-- Allow additional docs through game information
+The todo-list can be found at the **[todo wiki page](../../wiki/todo)**.
 
 ### License
 
