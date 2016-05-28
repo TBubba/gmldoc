@@ -1,0 +1,499 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"Project",
+				"ProjectFolder"
+			],
+			[
+				"scr",
+				"script_folder"
+			],
+			[
+				"con",
+				"continue"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/D/GitHub/gmldoc/gmdoc.py",
+			"settings":
+			{
+				"buffer_size": 13659,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/K/GameMaker/Projects/BubbasStash.gmx/gmldoc/compile_documents.bat",
+			"settings":
+			{
+				"buffer_size": 535,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/GitHub/gmldoc/templates/index.html",
+			"settings":
+			{
+				"buffer_size": 295,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/GitHub/gmldoc/templates/sidebar.html",
+			"settings":
+			{
+				"buffer_size": 295,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/GitHub/gmldoc/templates/layout.html",
+			"settings":
+			{
+				"buffer_size": 1843,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/GitHub/gmldoc/templates/method.html",
+			"settings":
+			{
+				"buffer_size": 1728,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"yo"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/D/GitHub/gmldoc",
+		"/D/GitHub/gmldoc/styles",
+		"/D/GitHub/gmldoc/templates"
+	],
+	"file_history":
+	[
+		"/D/GitHub/gmldoc/project_gmldoc/README.txt",
+		"/C/Users/Bubbe/AppData/Roaming/Sublime Text 3/Packages/Restart/Restart.sublime-settings",
+		"/D/GitHub/gmldoc/templates/index.html",
+		"/C/Users/Bubbe/AppData/Local/Temp/Rar$DRa0.578/PyRTF-0.45/examples/examples2.py",
+		"/C/Users/Bubbe/AppData/Local/Temp/Rar$DIa0.190/README",
+		"/D/GitHub/gmldoc/styles/_code.scss",
+		"/D/GitHub/gmldoc/styles/_theme.scss",
+		"/D/GitHub/gmldoc/gmdoc.pyc",
+		"/D/GitHub/gmldoc/styles/_colours.scss",
+		"/C/Users/Bubbe/AppData/Roaming/Sublime Text 3/Packages/Syntax Highlighting for Sass/Syntaxes/SCSS.tmLanguage",
+		"/D/GitHub/gmldoc/styles/all.scss",
+		"/C/Users/Bubbe/AppData/Roaming/Sublime Text 3/Packages/Syntax Highlighting for Sass/Syntaxes/Sass.tmLanguage",
+		"/D/GitHub/gmldoc/styles/all.css",
+		"/D/GitHub/gmldoc/styles/_skeleton.scss",
+		"/D/GitHub/gmldoc/styles/_normalize.scss",
+		"/D/GitHub/gmldoc/templates/layout.html",
+		"/D/GitHub/gmldoc/templates/method.html",
+		"/D/GitHub/gmldoc/gmdoc.py",
+		"/K/GameMaker/Projects/BubbasStash.gmx/gmldoc/compile_all.bat",
+		"/K/GameMaker/Projects/BubbasStash.gmx/gmldoc/compile_styles.bat",
+		"/K/GameMaker/Projects/BubbasStash.gmx/gmldoc/compile_documents.bat",
+		"/K/GameMaker/Projects/BubbasStash.gmx/gmldoc/docs/styles/all.min.css",
+		"/K/GameMaker/Projects/BubbasStash.gmx/gmldoc/docs/styles/all.css",
+		"/K/GameMaker/Projects/Terrain.gmx/gmldoc/compile_styles.bat",
+		"/K/GameMaker/Projects/Terrain.gmx/gmldocs/compile_styles.bat",
+		"/K/GameMaker/Projects/Terrain.gmx/gmldocs/compile_documents.bat",
+		"/K/GameMaker/Projects/Terrain.gmx/gmldocs/settings.xml",
+		"/K/GameMaker/Projects/Terrain.gmx/Terrain.project.gmx",
+		"/K/GameMaker/Projects/Terrain.gmx/gmldocs/gmldocs.xml",
+		"/D/GitHub/gmldoc/compile_styles.bat",
+		"/K/GameMaker/Projects/Terrain.gmx/gmldocs.xml",
+		"/K/GameMaker/Projects/Terrain.gmx/scripts/camera_move_center_new.gml",
+		"/K/GameMaker/Projects/Terrain.gmx/scripts/camera_bottom.gml",
+		"/D/GitHub/gmldoc/settings.txt",
+		"/K/GameMaker/Projects/Terrain.gmx/compile_documents.bat",
+		"/D/GitHub/gmldoc/compile_documents.bat",
+		"/D/GitHub/gmldoc/.gitignore",
+		"/D/GitHub/gmldoc/install.bat",
+		"/C/Python27/Lib/site-packages/README.txt",
+		"/C/Python27/README.txt",
+		"/D/GitHub/gmldoc/__init__.py",
+		"/D/GitHub/ShutdownTimer/RTF/Convert_RTF_To_ByteArray.bat",
+		"/D/Games/Minecraft/Server/1.9.2/eula.txt",
+		"/C/Users/Bubbe/Desktop/Wuka World/game/Game.exe.config",
+		"/C/Users/Bubbe/Desktop/Wuka World/game/content.config",
+		"/C/Users/Bubbe/Desktop/[www.mpc-g.com]SubRosaAlph42/config.txt",
+		"/C/Users/Bubbe/Desktop/[www.mpc-g.com]SubRosaAlph42/shaderoutput.txt",
+		"/D/Program/Factorio/bin/x64/server_ips.txt",
+		"/C/Users/Bubbe/AppData/Roaming/Factorio/config/config-server.ini",
+		"/C/Users/Bubbe/AppData/Local/Temp/Rar$DIa0.355/ReadMe.txt",
+		"/K/Saker/Game Maker/MY/TopDown/checklist.txt",
+		"/K/Saker/Game Maker/MY/TopDown/cred.txt",
+		"/K/DropBox/Dropbox/_Discord/_DiscordOverlord_OLD/_DiscordOverlord/bin/Debug/autoexec.txt",
+		"/C/Users/Bubbe/Desktop/gegol/manifest.json",
+		"/C/Users/Bubbe/Desktop/skola/styles.css",
+		"/C/Users/Bubbe/Desktop/skola/Biohazardsoftware/style.css",
+		"/C/Users/Bubbe/Desktop/gegol/background.js",
+		"/D/DownloadsTrash/_/_.txt",
+		"/K/Saker/BigbubNet/Games/GoldMiner/SQL/gm_level_ratings.sql",
+		"/K/Saker/BigbubNet/Games/GoldMiner/SQL/gm_levels.sql",
+		"/K/Saker/BigbubNet/Games/GoldMiner/SQL/gm_reports.sql",
+		"/K/Saker/BigbubNet/SQL/users.sql",
+		"/D/xampp/htdocs/php/connect.php",
+		"/K/Saker/BigbubNet/Current/php/connect.php",
+		"/K/Saker/BigbubNet/Current/php/tracker.php",
+		"/K/Saker/BigbubNet/SQL/api/api_games.sql",
+		"/K/Saker/BigbubNet/SQL/api/api_user_saves.sql",
+		"/K/Saker/BigbubNet/SQL/api/api_user_tokens.sql",
+		"/K/Saker/BigbubNet/SQL/recoverytokens.sql",
+		"/K/Saker/BigbubNet/SQL/trackers.sql",
+		"/K/Saker/BigbubNet/Current/api/goldminer/levels/upload.php",
+		"/I/cmdline.txt",
+		"/D/Saker/Dosbox/root/games/zork/README.TXT",
+		"/K/DropBox/Dropbox/_GoldMiner/Todo_Assets.txt",
+		"/K/Saker/BigbubNet/Current/api/goldminer/levels/remove.php",
+		"/C/Users/Bubbe/AppData/Local/Temp/Rar$DIa0.721/readme.txt",
+		"/C/Users/Bubbe/Desktop/PCE.KEY",
+		"/K/Saker/Emulators/PCENGINE/pce.cfg",
+		"/K/Saker/Emulators/PCENGINE/pce.ini",
+		"/K/Saker/Emulators/PCENGINE/readme.txt",
+		"/K/Saker/Emulators/PCENGINE/states/Neutopia (USA).me1",
+		"/K/Saker/Emulators/PCENGINE/log.txt"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 90.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"project_dir",
+			"ScriptFolder",
+			"add_child",
+			"		\n",
+			"Param",
+			";",
+			"extract_comment_text",
+			"{",
+			";"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/D/GitHub/gmldoc/gmdoc.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 13659,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3989,
+								3989
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 135.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/K/GameMaker/Projects/BubbasStash.gmx/gmldoc/compile_documents.bat",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 535,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								412,
+								412
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Batch File/Batch File.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/D/GitHub/gmldoc/templates/index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 295,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								107,
+								118
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/D/GitHub/gmldoc/templates/sidebar.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 295,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								295,
+								295
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/D/GitHub/gmldoc/templates/layout.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1843,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								410,
+								410
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/D/GitHub/gmldoc/templates/method.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1728,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "gmldoc_project.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 183.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

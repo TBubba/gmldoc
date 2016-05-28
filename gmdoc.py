@@ -90,6 +90,8 @@ class MethodReturn():
 		self.type = type         # Type of returned value      (not sure - currently string)
 		self.description = desc  # Description of the return   (string)
 
+class 
+
 # Kills the program and prints the given message
 def die(message):
 	print(message)
@@ -107,26 +109,56 @@ def read_xml(the_dir):
 	return ET.fromstring(contents)
 
 # Exctracts plain text from given RTF formatted text
+# Note: Only ASCII characters and almost all RTF is discarded
+# TODO make HTML tags out of the RTF (bold, font, size, color etc.)
 def extract_rtf_text(text):
-	#
-	depth = 0
-	last = ''
-	result = ''
+	depth = 0 # How many layers deep in "{}" (curly brackets) we are
+	escape_finishers = {'\\', ' ', '\n', ';', '{', '}'}
+	escaped = 0 # 0 = Not escaped | 1 = Escped | 2 = Escape just ended
+	slash_tail = '' #
+	last = '' # Last char from last run of the loop
+	result = '' # The text that will be returned when we are done
 	for char in text:
-		# Only reads text one layer of "{ }"
-		# (curly brackets) deep
-		if last != '\\':
-			if char == '{': # 
-				depth += 1
+		# Take care of escaped characters
+		if escaped == 1:
+			# Keep adding escaped chars to slash_tail
+			if char == '\\' and slash_tail != '': # End of escape
+				escaped = 0 # It ended with '\' after one or more escaped chars
+			elif char not in escape_finishers: # End escape characters
+				slash_tail += char # Continue escape (keep adding chars to slash_tail)
 				last = char
 				continue
-			elif char == '}': # 
-				depth -= 1
+			else: # End of escape
+				escaped = 2
+			# Do stuff depeding on slash_tail
+			if slash_tail == "line": # New line
+				result += '\n'
+			# TODO handle non-ASCII characters in some way
+			slash_tail = '' # Reset slash_tail
+		if escaped == 0: #
+			if char == '\\': # Start escape characters
+				escaped = 1
 				last = char
 				continue
-		if depth == 1: # 
+		else:
+			escaped = 0
+
+		# Change level if char is a non-escaped curly bracket
+		#if last != '\\': # Check if escaped
+		if char == '{': # Go down one level
+			depth += 1
+			last = char
+			continue
+		elif char == '}': # Go up one level
+			depth -= 1
+			last = char
+			continue
+
+		# Check if we are at the right curly bracket depth
+		if depth == 1: # Only reads text at "{}" depth 1
 			result += char
-		last = char # Update last
+
+		last = char # Update last (char to current)
 	return result
 
 # Extracts all comments from the given code
@@ -256,6 +288,22 @@ def extract_scripts_folder(script_folder, parent_element):
 			script_folder.add_child(new_folder) # Add it to current folder
 			extract_scripts_folder(new_folder, script_element) # Loop through it
 
+#
+def extract_help(help_filename, project):
+	# Open and read the entire help file
+	help_file = open(os.path.join(project_dir, help_filename), 'r')
+	help_data = help_file.read()
+	help_file.close()
+
+	# Extract all relevant data from the help file
+	help_data = extract_rtf_text(help_data)
+	
+	# Add help to the project
+	project.help = help_data
+
+	# Look through the help data for tokens
+	project.
+
 # Extracts all the relevant information from the given project
 # and creates (and returns) a Project instance with that information
 def exctract_project(project_filename):
@@ -275,10 +323,7 @@ def exctract_project(project_filename):
 	# TODO check if the XML element exists before taking it?
 	print("Reading project help file...")
 	help_filename = project_xml.find("help").find("rtf").text
-	help_file = open(os.path.join(project_dir, help_filename), 'r')
-	help_data = help_file.read()
-	help_file.close()
-	project.help = extract_rtf_text(help_data) # Add help to the project
+	extract_help(help_filename, project)
 	print(">> Successfully read project help file")
 
 	# Read all the project scripts and extract
