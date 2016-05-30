@@ -37,6 +37,11 @@
 ehthumbs.db
 Thumbs.db
 
+# Cache #
+#########
+
+*.sass-cache
+
 # Ignore Paths #
 ################
 

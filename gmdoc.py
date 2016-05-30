@@ -6,26 +6,80 @@ JINJA_ENV = Environment(loader=PackageLoader('gmdoc', 'templates'))
 # Templates
 METHOD_TEMPLATE = JINJA_ENV.get_template('method.html')
 INDEX_TEMPLATE = JINJA_ENV.get_template('index.html')
+SIDEBAR_TEMPLATE = JINJA_ENV.get_template('sidebar.html')
 
 # Basic types
 TYPE_REAL = 'real'
 TYPE_STRING = 'string'
 
-class Extension(object):
-	def __init__(self, name, description):
-		self.name = name
-		self.description = description
+#
+class FlagSource(object):
+    def __init__(self):
+    	super(FlagSource, self).__init__() # Run parent constructor
+    	self.flags_def = {} # Default flag values            (dict[string:string])
+    	self.flags_setdef = {} # Default flag vales when changed (but no value entered) (dict[string:string])
 
-# Represents the entire project the documentation is generated for
+    # Set (a flag)
+    def set(self, flag, def_value, setdef_value): # Sets both
+    	self.flags_def[flag] = def_value
+    	self.flags_setdef[flag] = setdef_value
+    def set_def(self, flag, value): # Sets "flags_def" (default)
+    	self.flags_def[flag] = value
+    def set_setdef(self, flag, value): # Sets "flags_setdef" (set-def)
+    	self.flags_setdef[flag] = value
+
+    # Get (a flags value)
+    def get_def(self, flag, value): # Gets "flags_def" (default)
+    	return self.flags_def.get(flag, value)
+    def get_setdef(self, flag, value): # Gets "flags_setdef" (set-def)
+    	return self.flags_setdef.get(flag, value)
+
+    # Factory
+    @staticmethod
+    def factory_method():
+    	source = FlagSource()
+    	source.set('private',   '0', '1') # If it should not be in the compiled docs (number)
+    	source.set('nosidebar', '0', '1') # If it should not be in the sidebar       (number)
+    	return source
+
+#
+class FlagCollection(object):
+    def __init__(self, source):
+    	super(FlagCollection, self).__init__() # Run parent constructor
+    	self.flags = {} # Flags and their current value     (dict[string:string])
+    	self.source = source # Object that handels defaults (FlagSource)
+    	self.flags = dict(source.flags_def) # Copy default flags from source
+
+    # Set a flag (creates one if it doesn't exist)
+    def set(self, flag, value):
+    	self.flags[flag] = value
+
+    # Set a flag to it's set-def value (creates one if it doesn't exist)
+    def set_setdef(self, flag):
+    	setdef = source.get_setdef(flag, None)
+    	if (setdef == None):
+    		raise Exception("Could not find set-def value of flag " + flag)
+    	self.flags[flag] = setdef
+
+    # Returns value of a flag (or default if not found)
+    def get(self, flag, default):
+    	return self.flags.get(flag, default)
+
+    # Resets to default flags (copies the default)
+    def reset(self):
+    	self.flags = dict(self.source.flags_def)
+
+# Represents the entire Game Maker project that the documentation
+# will be generated for. It is not the documenatation itself.
 class Project(object):
     def __init__(self):
     	super(Project, self).__init__() # Run parent constructor
     	self.name = ''          # Name of the project        (string)
     	self.directory = ''     # Path to the project        (string)
-        self.methods = []         # Collection of scripts      (Method[])
+        self.methods = []         # Collection of scripts    (Method[])
         self.methodsFolder = ScriptFolder("scripts", self) # Folder tree of scripts     (ScriptFolder)
        #self.objects = []
-        self.help    = ''         # Text from the help file    (string)
+        self.help    = ProjectHelp() # Projects help file    (ProjectHelp)
 
 # Represents an item inside the project (Folder, script, object etc.)
 class ProjectItem(object):
@@ -53,7 +107,7 @@ class ProjectFolder(ProjectItem):
     	super(ProjectFolder, self).__init__() # Run parent constructor
     	self.name = name          # Name of the folder          (string)
 
-# Represents a folder in the project (for scripts, objects etc.)
+# Represents a folder in the project for scripts specifically
 class ScriptFolder(ProjectFolder):
     def __init__(self, name, project):
     	super(ScriptFolder, self).__init__(name) # Run parent constructor
@@ -67,6 +121,7 @@ class ScriptFolder(ProjectFolder):
     			self.project.methods.append(child)
     	else:
     		raise Exception("Only ProjectItems can be added as children to one another")
+
 # Represents a method in the source code
 class Method(ProjectItem):
     def __init__(self, name, syntax):
@@ -76,21 +131,49 @@ class Method(ProjectItem):
         self.syntax = syntax     # Syntax of the script        (string)
         self.description = ''    # Description                 (string)
         self.ret = None          # Return value/type           (MethodReturn)
+        self.flags = FlagCollection(Method.flag_source) # All flags from doc comments (FlagCollection)
+
+    #
+    flag_source = FlagSource.factory_method()
 
 # Represents a method parameter in the source code
-class MethodParam():
+class MethodParam(object):
 	def __init__(self, name, type, desc):
+    	#super(MethodParam, self).__init__() # Run parent constructor
 		self.name = name         # Name of the parameter       (string)
 		self.type = type         # Type of the parameter       (not sure - currently string)
 		self.description = desc  # Description of the paramter (string)
 
 # Represents a method return value/type in the source code
-class MethodReturn():
+class MethodReturn(object):
 	def __init__(self, type, desc):
+    	#super(MethodReturn, self).__init__() # Run parent constructor
 		self.type = type         # Type of returned value      (not sure - currently string)
 		self.description = desc  # Description of the return   (string)
 
-class 
+# Respresents the "Game Information" or "help file" of the project
+class ProjectHelp(object):
+    def __init__(self):
+    	#super(ProjectHelp, self).__init__() # Run parent constructor
+    	self.plaintext = ''      # All text from the help file               (string)
+    	self.docs = ''           # The documentation from the help file      (string)
+    	self.docs_split = ''     # Same as "docs" but split on each new line (string[])
+
+# Represents the documentation for the project. This will be what
+# keeps the settings for how the documentation will be and look.
+class Docs(object):
+    def __init__(self):
+    	#super(Docs, self).__init__() # Run parent constructor
+    	self.project = None          # The project the documentation will be about  (Project)
+    	self.settings = DocsSettings() # The settings for the documentation         (DocsSettings)
+    	self.title = ''              # The title of all outputted doc pages         (string)
+    	self.description = ''        # The description of the project (header data) (string)
+
+# The settings for the documentation
+class DocsSettings(object):
+    def __init__(self):
+    	#super(DocsSettings, self).__init__() # Run parent constructor
+    	self.allowjavascript = 0 # If JavaScript will be allowed in the docs (0/1 or True/False)
 
 # Kills the program and prints the given message
 def die(message):
@@ -213,6 +296,23 @@ def strip_token(token, code):
 	if i >= 0:
 		return code[i+len(token):].strip()
 
+# Splits flags
+# Returns a dictionary with flag names as keys and their values as values
+# (The flags will have None as their value if '=' was entered - use set-def instead)
+def split_flags(code):
+	# Split the flag-value pairs from each others
+	flags = code.split() # Split on space (' ')
+	split_flags = {}
+	for flag in flags:
+		# Split the flag from their value and add them to the dictionary
+		flag = flag.split('=', 1) # Split at the first equals sign ('=')
+		if 1 < len(list): # If at last one '=' was entered
+			split_flags[flag[0]] = flag[1]
+		else: # No value was eneterd
+			split_flags[flag[0]] = None
+
+	return flags
+
 # Extracts one script from a script xml element
 # and creates and returns a Method instance from it
 def extract_script(script, script_folder):
@@ -240,18 +340,20 @@ def extract_script(script, script_folder):
 	# Generate a method object from the script file
 	method = Method(script_name, syntax)
 	desc = ''
-	is_private = False # If the script is private (and should be not be included)
 	for comment in comments:
-		the_param = strip_token("@param", comment)
-		the_return = strip_token("@return", comment)
-		the_flags = strip_token("@flags", comment)
+		# Check for any (script compatible) token
+		the_param  = strip_token("@param",  comment) # TODO make some sort of "switch"-
+		the_return = strip_token("@return", comment) #      like replacement for this
+		the_flags  = strip_token("@flags",  comment)
+
+		# 
 		if the_flags: # This line is a flag line
-			the_flags = the_flags.split()
-			for flag in the_flags:
-				if (flag == "private"): # Private, hides the script from the documentation
-					is_private = True
-				#elif (flag == ""): # Some other flag, doe something else
-					#
+			flags = split_flags(the_flags)
+			for flag, value in flags.iteritems():
+				if (value == None): # No values was entered
+					method.flags.setdef(flag)
+				else:
+					method.flags.set(flag, value)
 		elif the_param: # This line is about a parameter
 			the_param = the_param.split(' ',1)
 			method.params.append(MethodParam(the_param[0], TYPE_REAL, the_param[1]))
@@ -259,11 +361,13 @@ def extract_script(script, script_folder):
 			method.return_value = the_return
 		else: # This line is part of the description
 			desc += strip_leading_comment_markup(comment)
+	
+	# Add description to script
 	method.description = desc
 	print(method.description)
 
 	# Add script to project script collection
-	if is_private != True: # Check if script was flagged as private
+	if method.flags.get('private', 0) != 1: # Check if script was flagged as private
 		script_folder.add_child(method) # Add script to the project script collection
 	else:
 		print('Skipping private script ' + script_name)
@@ -272,10 +376,10 @@ def extract_script(script, script_folder):
 # any script it finds and creates a folder structure from it
 def extract_scripts_folder(script_folder, parent_element):
 	folder_children = parent_element.getchildren() # Get all children in folder
-	if folder_children is None: # Return if empty
+	if folder_children is None: # Return if folder is empty
 		return
 
-	#
+	# Go through all folder items (children)
 	for script_element in parent_element:
 		# Get elements name tag (only folders have name tags)
 		script_folder_name = script_element.get("name")
@@ -288,21 +392,38 @@ def extract_scripts_folder(script_folder, parent_element):
 			script_folder.add_child(new_folder) # Add it to current folder
 			extract_scripts_folder(new_folder, script_element) # Loop through it
 
-#
-def extract_help(help_filename, project):
+# Reads and extracts all relevant information from the projects help file
+def extract_help(help_filepath, project):
+	# Create and add project help to project
+	project_help = ProjectHelp()
+	project.help = project_help
+
 	# Open and read the entire help file
-	help_file = open(os.path.join(project_dir, help_filename), 'r')
+	help_file = open(help_filepath, 'r')
 	help_data = help_file.read()
 	help_file.close()
 
 	# Extract all relevant data from the help file
-	help_data = extract_rtf_text(help_data)
-	
-	# Add help to the project
-	project.help = help_data
+	help_text = extract_rtf_text(help_data)
+	help_docs = extract_special_comment_text(help_data)
+	help_docs_split = help_docs.split('\n')
 
-	# Look through the help data for tokens
-	project.
+	# Add the relevant data to the projects help
+	project_help.plaintext = help_text
+	project_help.docs = help_docs
+	project_help.docs_split = help_docs_split
+
+	# 
+	for comment in help_docs_split:
+		token_ignore = strip_token("@ignore", comment)
+		token_inojs = strip_token("@nojs", comment)
+
+		if token_ignore: # This line is the "ignore" token
+			s = 2 # Do something?
+		elif token_inojs: #
+			s = 2 #
+
+	# Do something more with the tokens maybe?
 
 # Extracts all the relevant information from the given project
 # and creates (and returns) a Project instance with that information
@@ -323,7 +444,8 @@ def exctract_project(project_filename):
 	# TODO check if the XML element exists before taking it?
 	print("Reading project help file...")
 	help_filename = project_xml.find("help").find("rtf").text
-	extract_help(help_filename, project)
+	help_filepath = os.path.join(project_dir, help_filename)
+	extract_help(help_filepath, project)
 	print(">> Successfully read project help file")
 
 	# Read all the project scripts and extract
@@ -336,36 +458,32 @@ def exctract_project(project_filename):
 	# Return project
 	return project;
 
-# Documents the given project file
-def doc(project_file, outdir):
-	# TODO normalize outdir - remove trailing /
-	# and remove any leading dots and / 
-
-	# Extract the project from the project file
-	# and all files listed in it (scripts, objects etc.)
-	project = exctract_project(project_file)
-
-	# TODO create a proper extension
-	extension = Extension('TODO Title','TODO Description')
+# Generates/Renders the HTML for the final documentation
+def generate_documentation(docs, outdir):
 
 	# Write the HTML files
-	# Creating the output directory if it doesn't exist
-	# Then generated the index.html file
-	# Then finally creating another html for each method
+	# Create output directory if it doesn't exist
 	if not os.path.exists(outdir):
 		os.makedirs(outdir)
+
+	# Generate the sidebar HTML (doesn't have to be a file)
+	sidebar_html = SIDEBAR_TEMPLATE.render({
+		'docs': docs
+	})
+
+	# Generate the index.html file
 	index_html = INDEX_TEMPLATE.render({
-		'extension': extension,
-		'all_methods': project.methods,
+		'docs': docs
 	})
 	index_file = open(os.path.join(outdir,'index.html'), 'w')
 	index_file.write(index_html)
 	index_file.close()
-	for method in project.methods:
+
+	# Then finally creating another html for each method
+	for method in docs.project.methods:
 		print("Rendering file %s", method.name)
 		render_params = {
-			'extension': extension,
-			'all_methods': project.methods,
+			'docs': docs,
 			'method': method,
 			# Uncomment these lines when testing locally
 			# 'stylesheet_url': '../styles/all.css',
@@ -374,6 +492,22 @@ def doc(project_file, outdir):
 		text_file = open(os.path.join(outdir,method.name + '.html'), "w")
 		text_file.write(the_html)
 		text_file.close()
+
+# Documents the given project file
+def doc(project_file, outdir):
+	# TODO normalize outdir - remove trailing /
+	# and remove any leading dots and / 
+
+	#
+	docs = Docs()
+
+	# Extract the project from the project file
+	# and all files listed in it (scripts, objects etc.)
+	project = exctract_project(project_file)
+	docs.project = project
+
+	# Generate / Render the HTML
+	generate_documentation(docs, outdir)
 
 # Check command line args
 if len(sys.argv) < 2:
