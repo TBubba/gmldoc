@@ -6,7 +6,6 @@ JINJA_ENV = Environment(loader=PackageLoader('gmdoc', 'templates'))
 # Templates
 METHOD_TEMPLATE = JINJA_ENV.get_template('method.html')
 INDEX_TEMPLATE = JINJA_ENV.get_template('index.html')
-SIDEBAR_TEMPLATE = JINJA_ENV.get_template('sidebar.html')
 
 # Basic types
 TYPE_REAL = 'real'
@@ -29,10 +28,10 @@ class FlagSource(object):
     	self.flags_setdef[flag] = value
 
     # Get (a flags value)
-    def get_def(self, flag, value): # Gets "flags_def" (default)
-    	return self.flags_def.get(flag, value)
-    def get_setdef(self, flag, value): # Gets "flags_setdef" (set-def)
-    	return self.flags_setdef.get(flag, value)
+    def get_def(self, flag, default=None): # Gets "flags_def" (default)
+    	return self.flags_def.get(flag, default)
+    def get_setdef(self, flag, default=None): # Gets "flags_setdef" (set-def)
+    	return self.flags_setdef.get(flag, default)
 
     # Factory
     @staticmethod
@@ -62,7 +61,7 @@ class FlagCollection(object):
     	self.flags[flag] = setdef
 
     # Returns value of a flag (or default if not found)
-    def get(self, flag, default):
+    def get(self, flag, default=None):
     	return self.flags.get(flag, default)
 
     # Resets to default flags (copies the default)
@@ -306,12 +305,12 @@ def split_flags(code):
 	for flag in flags:
 		# Split the flag from their value and add them to the dictionary
 		flag = flag.split('=', 1) # Split at the first equals sign ('=')
-		if 1 < len(list): # If at last one '=' was entered
+		if 1 < len(flag): # If at last one '=' was entered
 			split_flags[flag[0]] = flag[1]
 		else: # No value was eneterd
 			split_flags[flag[0]] = None
 
-	return flags
+	return split_flags
 
 # Extracts one script from a script xml element
 # and creates and returns a Method instance from it
@@ -465,11 +464,6 @@ def generate_documentation(docs, outdir):
 	# Create output directory if it doesn't exist
 	if not os.path.exists(outdir):
 		os.makedirs(outdir)
-
-	# Generate the sidebar HTML (doesn't have to be a file)
-	sidebar_html = SIDEBAR_TEMPLATE.render({
-		'docs': docs
-	})
 
 	# Generate the index.html file
 	index_html = INDEX_TEMPLATE.render({
