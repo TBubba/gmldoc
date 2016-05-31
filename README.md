@@ -18,10 +18,10 @@ return argument0 + argument1
 
 Each script has four components;
 
-- **Usage** eg. my_cool_script(arg0,arg1)
-- **Description** eg. Simply adds the two arguments together.
-- **Parameters** in the format <name> <description> eg. arg0 The first argument to the function
-- **Return Statement** eg. An awesome value that you probably want to deal with
+- **Sytnax** eg. `my_cool_script(arg0,arg1)`
+- **Description** eg. `Simply adds the two arguments together.`
+- **Parameters** in the format <name> <description> eg. `arg0 The first argument to the function`
+- **Return Statement** eg. `An awesome value that you probably want to deal with`
 
 You can comment any way you like, the tool will stop reading your comments once a break in
 leading comment is found.
@@ -30,12 +30,10 @@ You can also use markup in your comments to give headings, bold text and code ex
 
 ```
 /// my_super_well_documented_function()
-/// <p>This is an awesome function that doesn't do very much, but has 
-/// awesome documentation.</p>
 /// <p>We can add some extra spacing using line breaks and paragraph tags.<p>
 ///	</br>
-/// <h5>Example</h5>
-/// <p>Here is an example of how to use this function.</p>
+/// <h5>And headers</h5>
+/// <p>And even code:</p>
 /// <pre>
 /// var greeting = my_super_well_documented_function();
 /// show_debug_message(greeting);
